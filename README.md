@@ -25,7 +25,7 @@ The Student Test Performance Management System is a web application designed to 
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/su-sudo/PlacementAdmin.git
+   git clone https://github.com/su-sudo/Placement-Admin.git
    cd PlacementAdmin
 Set Up the Database
 
