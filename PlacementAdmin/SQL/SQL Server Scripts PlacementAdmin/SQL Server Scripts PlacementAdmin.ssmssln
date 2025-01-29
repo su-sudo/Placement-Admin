@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# SQL Server Management Studio Solution File, Format Version 20.00
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "SQL Server Scripts PlacementAdmin", "SQL Server Scripts PlacementAdmin\SQL Server Scripts PlacementAdmin.ssmssqlproj", "{35A0EF7E-654A-4C92-8562-17FFA0F4CFA5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Default|Default = Default|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{35A0EF7E-654A-4C92-8562-17FFA0F4CFA5}.Default|Default.ActiveCfg = Default
+		{A63B179C-4A1F-4D66-9064-76F9DA2B12E5}.Default|Default.ActiveCfg = Default
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {80883438-EF9B-46ED-95B5-156A77747F0C}
+	EndGlobalSection
+EndGlobal

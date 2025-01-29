@@ -1,0 +1,37 @@
+﻿@model List<PlacementAdmin.Models.Test>
+
+@{
+    Layout = "~/Views/User/_StudentLayout.cshtml";
+    ViewData["Title"] = "Available Tests";
+}
+
+<h2>Available Tests</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Test Name</th>
+            <th>Course Stream</th>
+            <th>Created Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var test in Model)
+        {
+            <tr>
+                <td>@test.TestName</td>
+                <td>@test.CourseStreamId</td> <!-- Update this to show the course stream name if needed -->
+                <td>@test.CreatedDate.ToString("yyyy-MM-dd")</td>
+                <td>
+                    <a asp-controller="Tests" asp-action="TakeTest" asp-route-id="@test.TestId" class="btn btn-primary">Take Test</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

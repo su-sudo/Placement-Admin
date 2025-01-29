@@ -1,0 +1,89 @@
+﻿@model PlacementAdmin.Models.TestQuestionViewModel
+
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewData["Title"] = "Add Questions to Test";
+}
+
+<h2>Add Questions to Test</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<form id="filterForm" method="post" asp-action="FetchQuestions">
+    <div class="form-group">
+        <label for="SelectedCourseStream">Course Stream</label>
+        <select class="form-control" id="SelectedCourseStream" name="courseStream">
+            <option value="">Select Course Stream</option>
+            @foreach (var stream in Model.CourseStreams)
+            {
+                <option value="@stream.CourseStreamId">@stream.Name</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="SelectedDifficultyLevel">Difficulty Level</label>
+        <select class="form-control" id="SelectedDifficultyLevel" name="difficultyLevel">
+            <option value="">Select Difficulty Level</option>
+            @foreach (var level in Model.DifficultyLevels)
+            {
+                <option value="@level">@level</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="SelectedQuestionType">Question Type</label>
+        <select class="form-control" id="SelectedQuestionType" name="questionType">
+            <option value="">Select Question Type</option>
+            @foreach (var type in Model.QuestionTypes)
+            {
+                <option value="@type">@type</option>
+            }
+        </select>
+    </div>
+    <button type="button" class="btn btn-primary" onclick="fetchQuestions()">Filter Questions</button>
+</form>
+
+<form method="post" asp-action="AddQuestionsToTest">
+    <div class="form-group">
+        <label for="TestId">Select Test</label>
+        <select asp-for="TestId" class="form-control">
+            @foreach (var test in Model.Tests)
+            {
+                <option value="@test.TestId">@test.TestName</option>
+            }
+        </select>
+    </div>
+
+    <div id="questions-container"></div>
+
+    <button type="submit" class="btn btn-primary">Add Questions to Test</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function fetchQuestions() {
+            var form = $('#filterForm');
+            $.ajax({
+                url: '@Url.Action("FetchQuestions")',
+                type: 'POST',
+                data: form.serialize(),
+                success: function (data) {
+                    $('#questions-container').html(data);
+                },
+                error: function () {
+                    alert("An error occurred while fetching questions.");
+                }
+            });
+        }
+    </script>
+}
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

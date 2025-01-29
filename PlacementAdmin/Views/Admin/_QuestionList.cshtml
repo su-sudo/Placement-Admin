@@ -1,0 +1,33 @@
+﻿@model List<PlacementAdmin.Models.QuestionBank>
+
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Select</th>
+                <th>Question Text</th>
+                <th>Type</th>
+                <th>Difficulty</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var question in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" name="SelectedQuestionIds" value="@question.QuestionId" />
+                    </td>
+                    <td>@question.QuestionText</td>
+                    <td>@question.QuestionType</td>
+                    <td>@question.DifficultyLevel</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div>No questions available for the selected criteria.</div>
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

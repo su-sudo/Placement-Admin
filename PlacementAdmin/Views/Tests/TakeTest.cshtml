@@ -1,0 +1,44 @@
+﻿
+@model PlacementAdmin.Models.TestDetails;
+@using System.Security.Claims;
+
+@{
+    ViewData["Title"] = "Take Test";
+    Layout = "~/Views/User/_StudentLayout.cshtml";
+    var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+}
+<h2>Test Questions</h2>
+
+<form method="post" asp-controller="Tests" asp-action="SubmitTest">
+    <input type="hidden" name="TestId" value="@Model.TestId" />
+    
+    <input type="hidden" name="UserId" value="@userId" />
+    @foreach (var question in Model.Questions)
+    {
+        <div class="mb-3">
+            <h4>@question.QuestionText</h4>
+            @if (question.QuestionType == "MCQ")
+            {
+                @foreach (var option in question.Options)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="Answers[@question.QuestionId]" value="@option.OptionId" id="option_@option.OptionId">
+                        <label class="form-check-label" for="option_@option.OptionId">
+                            @option.OptionText
+                        </label>
+                    </div>
+                }
+            }
+            else if (question.QuestionType == "Code")
+            {
+                <textarea class="form-control" name="Answers[@question.QuestionId]" rows="4"></textarea>
+            }
+        </div>
+    }
+    <button type="submit" class="btn btn-primary">Submit Test</button>
+</form>
+
+
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

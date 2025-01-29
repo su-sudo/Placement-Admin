@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Admin</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">
+            <img src="~/images/logo.png" alt="Logo" style="width: 30px; height: auto;">
+        </a>
+        <a class="navbar-brand" href="@Url.Action("Index", "Admin")">Admin Dashboard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav m-1 bg-primary">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item border border-secondary m-1 bg-primary">
+                    <a class="nav-link " href="@Url.Action("AddCourseStream", "Admin")">Add Course Stream</a>
+                </li>
+                <li class="nav-item border border-secondary m-1 bg-primary">
+                    <a class="nav-link" href="@Url.Action("CreateTest", "Admin")">Create Test</a>
+                </li>
+                <li class="nav-item border border-secondary m-1 bg-primary">
+                    <a class="nav-link" href="@Url.Action("AddQuestion", "Admin")">Add Question</a>
+                </li>
+                <li class="nav-item border border-secondary m-1 bg-primary">
+                    <a class="nav-link" href="@Url.Action("AddQuestionsToTest", "Admin")">Add Questions to Test</a>
+                </li>
+                <li class="nav-item border border-secondary m-1 bg-primary">
+                    <a class="nav-link" href="@Url.Action("AssignTestToStudents", "Admin")">Assign Test to Students</a>
+                </li>
+                <li class="nav-item border border-secondary m-1 bg-primary">
+                    <a class="nav-link" href="@Url.Action("Logout", "Account")">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted ">
+        <div class="container">
+            &copy; 2024 - PlacementAdmin - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    @RenderSection("Scripts", required: false)
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/site.js"></script>
+</body>
+</html>

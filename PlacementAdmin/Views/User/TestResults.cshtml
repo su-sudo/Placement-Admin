@@ -1,0 +1,39 @@
+﻿@* @model PlacementAdmin.Models.TestResult *@
+@model List<PlacementAdmin.Models.TestResult>
+
+@{
+    ViewData["Title"] = "Test Results";
+    Layout = "~/Views/User/_StudentLayout.cshtml";
+}
+
+
+<h2>My Test Results</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Test Name</th>
+            <th>Created Date</th>
+            <th>Total Questions</th>
+            <th>Correct Answers</th>
+            <th>Score Percentage</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var result in Model)
+        {
+            <tr>
+                <td>@result.TestName</td>
+                <td>@result.CreatedDate.ToString("yyyy-MM-dd")</td>
+                <td>@result.TotalQuestions</td>
+                <td>@result.CorrectAnswers</td>
+                <td>@result.ScorePercentage.ToString("F2")%</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

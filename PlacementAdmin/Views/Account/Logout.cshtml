@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Redirecting...</title>
+    <script type="text/javascript">
+        window.onload = function() {
+            if (window.history && window.history.pushState) {
+                window.history.pushState(null, null, window.location.href);
+                window.history.pushState(null, null, window.location.href);
+                window.onpopstate = function(event) {
+                    window.history.pushState(null, null, window.location.href);
+
+                    window.location.href = '/Home/Index';
+                };
+            }
+        };
+
+        window.location.href = '/Home/Index';
+    </script>
+</head>
+<body>
+    Redirecting...
+</body>
+</html>

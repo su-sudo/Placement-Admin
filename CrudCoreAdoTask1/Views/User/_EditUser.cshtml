@@ -1,0 +1,48 @@
+﻿@model CrudCoreAdoTask1.Models.Users
+
+<div class="modal-header">
+    <h5 class="modal-title">Edit User</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form id="editUserForm" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="DateOfBirth" class="control-label"></label>
+            <input asp-for="DateOfBirth" class="form-control" />
+            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Current Profile Picture</label>
+            <div>
+                <img src="@ConvertBase64ToDataURL(Model.ProfilePic)" alt="Profile Picture" style="width: 100px; height: 100px;" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ProfilePic" class="control-label mt-3">Select New Profile Picture</label>
+            <input type="file" asp-for="ProfilePic" class="form-control" />
+            <span asp-validation-for="ProfilePic" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Save changes</button>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
+
+</div>
+
+@functions {
+    public static string ConvertBase64ToDataURL(string base64String, string imageFormat = "jpeg")
+    {
+        if (string.IsNullOrEmpty(base64String)) return string.Empty;
+
+        return $"data:image/{imageFormat};base64,{base64String}";
+    }
+}

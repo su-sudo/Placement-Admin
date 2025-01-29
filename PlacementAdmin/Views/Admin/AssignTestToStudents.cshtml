@@ -1,0 +1,94 @@
+﻿@model PlacementAdmin.Models.TestAssignmentModel
+
+@{
+    ViewData["Title"] = "AssignTestToStudents";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+<h2>Assign Test to Students</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<form id="courseStreamForm">
+    <div class="form-group">
+        <label for="CourseStreamId">Select Course Stream</label>
+        <select class="form-control" id="CourseStreamId" name="CourseStreamId" onchange="fetchData()">
+            <option value="">Select Course Stream</option>
+            @foreach (var stream in Model.CourseStreams)
+            {
+                <option value="@stream.CourseStreamId">@stream.Name</option>
+            }
+        </select>
+    </div>
+</form>
+
+<form method="post" asp-action="AssignTestToStudents">
+    <div class="form-group">
+        <label for="TestId">Select Test</label>
+        <select asp-for="TestId" class="form-control" id="TestId">
+            <option value="">Select Test</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="UserIds">Select Students</label>
+        <select asp-for="UserIds" class="form-control" id="UserIds" multiple="multiple">
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Assign Test</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function fetchData() {
+            var courseStreamId = $('#CourseStreamId').val();
+
+            $.ajax({
+                url: '@Url.Action("FetchTests")',
+                type: 'POST',
+                data: { courseStreamId: courseStreamId },
+                success: function (data) {
+                    var testSelect = $('#TestId');
+                    testSelect.empty();
+                    testSelect.append('<option value="">Select Test</option>');
+                    $.each(data, function (index, test) {
+                        testSelect.append('<option value="' + test.testId + '">' + test.testName + '</option>');
+                    });
+                },
+                error: function () {
+                    alert("An error occurred while fetching tests.");
+                }
+            });
+
+            $.ajax({
+                url: '@Url.Action("FetchStudents")',
+                type: 'POST',
+                data: { courseStreamId: courseStreamId },
+                success: function (data) {
+                    var studentSelect = $('#UserIds');
+                    studentSelect.empty();
+                    $.each(data, function (index, student) {
+                        studentSelect.append('<option value="' + student.id + '">' + student.username + '</option>');
+                    });
+                },
+                error: function () {
+                    alert("An error occurred while fetching students.");
+                }
+            });
+        }
+    </script>
+}
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+

@@ -1,0 +1,95 @@
+﻿@model PlacementAdmin.Models.AddQuestionViewModel
+
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewData["Title"] = "Add Question";
+}
+
+<h2>Add Question</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<form method="post" asp-action="AddQuestion" id="addQuestionForm">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="QuestionText"></label>
+        <input asp-for="QuestionText" class="form-control" />
+        <span asp-validation-for="QuestionText" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="QuestionType"></label>
+        <select asp-for="QuestionType" class="form-control" onchange="toggleQuestionType()">
+            <option value="MCQ">MCQ</option>
+            <option value="Code">Code</option>
+        </select>
+        <span asp-validation-for="QuestionType" class="text-danger"></span>
+    </div>
+
+    <div class ="form-group" id="CodingAnswerField">
+        <label asp-for="AnswerFieldForCoding">Input Answer Code </label>
+        <textarea asp-for="AnswerFieldForCoding" class="form-control" style="height: 150px;"></textarea>
+        <span asp-validation-for="AnswerFieldForCoding" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CourseStreamId"></label>
+        <select asp-for="CourseStreamId" class="form-control">
+            @foreach (var stream in Model.CourseStreams)
+            {
+                <option value="@stream.CourseStreamId">@stream.Name</option>
+            }
+        </select>
+        <span asp-validation-for="CourseStreamId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DifficultyLevel"></label>
+        <select asp-for="DifficultyLevel" class="form-control">
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+        </select>
+        <span asp-validation-for="DifficultyLevel" class="text-danger"></span>
+    </div>
+
+    <div id="options-container" class="form-group">
+        <label>Options (for MCQ)</label>
+        <div class="option-item">
+            <input type="text" name="Options[0].OptionText" placeholder="Option 1" class="form-control mb-2" />
+            <input type="hidden" name="Options[0].IsCorrect" value="false" />
+            <input type="checkbox" name="Options[0].IsCorrect" value="true" /> Correct
+        </div>
+        <button type="button" class="btn btn-secondary" onclick="addOption()">Add Option</button>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Question</button>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/js/Dynamic_option.js"></script>
+    <script>
+        document.getElementById('addQuestionForm').addEventListener('submit', function(event) {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"][name^="Options"]');
+            checkboxes.forEach(function(checkbox) {
+                if (checkbox.checked) {
+                    var hiddenField = checkbox.previousElementSibling;
+                    if (hiddenField.type === 'hidden' && hiddenField.name === checkbox.name) {
+                        hiddenField.remove();
+                    }
+                }
+            });
+        });
+    </script>
+}

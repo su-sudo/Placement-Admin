@@ -1,0 +1,37 @@
+﻿@model List<PlacementAdmin.Models.TopThreeStudents>;
+
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewData["Title"] = "Admin Dashboard";
+    var i = 1;
+    var adminName = User.Identity.Name;
+}
+
+<h2>Admin Home</h2>
+<p>Welcome, @adminName!</p>
+<h2 class="accordion-header">Our Top #3's</h2>
+
+<div class="container m-3 ">
+    <div class="row border ">
+        <div class="col-sm fw-bold">Rank# </div>
+        <div class="col-sm bg-gradient">User Id</div>
+        <div class="col-sm fw-bold">Name </div>
+        <div class="col-sm fw-bold">Mark</div>
+
+
+    </div>
+    @foreach (var Student in Model){
+        
+        <div class="row pt-4 bg-primary bg-gradient text-white">
+            <div class="col-sm">@i</div>
+            <div class="col-sm">@Student.UserId</div>
+            <div class="col-sm">@Student.UserName </div>
+            <div class="col-sm">@Student.TotalScore </div>
+           
+        </div>
+        { i += 1; }
+    }
+    
+
+</div>
+<p>Use the navigation menu to manage course streams, tests, questions, and student assignments.</p>

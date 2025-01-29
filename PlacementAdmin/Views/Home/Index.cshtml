@@ -1,0 +1,63 @@
+﻿@model PlacementAdmin.Models.ViewModel.HomeViewModel
+
+<div class="container mt-5">
+    <div class="text-center">
+        <h1 class="display-4">Welcome to PlacementAdmin</h1>
+        <p class="lead">Your one-stop solution for placement drive registration and machine tests.</p>
+    </div>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger mt-4" id="success-alert" role="alert">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <div class="about-us-section mt-5">
+        <h2>About Us</h2>
+        <p>
+            PlacementAdmin is designed to streamline the placement process for colleges and universities.
+            Our platform offers a comprehensive solution for students to register for placement drives, attempt machine tests,
+            and track their progress and results. Administrators can efficiently manage question banks, customize tests, and
+            analyze test results to better prepare students for their career journeys.
+        </p>
+        <h3>Our Objectives</h3>
+        <ul class="list-unstyled">
+            <li><i class="fa fa-check-circle text-primary"></i> Simplify the placement drive registration process for students.</li>
+            <li><i class="fa fa-check-circle text-primary"></i> Provide a robust platform for machine testing, including multiple-choice and coding questions.</li>
+            <li><i class="fa fa-check-circle text-primary"></i> Enable administrators to manage and customize tests easily.</li>
+            <li><i class="fa fa-check-circle text-primary"></i> Offer detailed analytics to track student performance and readiness.</li>
+        </ul>
+        <h3>Advantages</h3>
+        <ul class="list-unstyled">
+            <li><i class="fa fa-star text-warning"></i> Easy registration and test-taking process for students.</li>
+            <li><i class="fa fa-star text-warning"></i> Centralized question bank management for administrators.</li>
+            <li><i class="fa fa-star text-warning"></i> Customizable tests to suit different placement categories and difficulty levels.</li>
+            <li><i class="fa fa-star text-warning"></i> Comprehensive result tracking and analytics to help students improve.</li>
+        </ul>
+    </div>
+
+    <div class="text-center mt-5">
+        <h2>Contact Us</h2>
+        <p>If you have any questions or need support, please reach out to us at <a href="mailto:support@placementadmin.com">support@placementadmin.com</a>.</p>
+    </div>
+
+
+</div>
+
+@await Html.PartialAsync("_SignUpModal", Model.SignUpViewModel)
+@await Html.PartialAsync("_LoginModal", Model.loginViewModel)
+<script src="~/js/tooltip-dynamics.js"></script>
+@* <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> *@
+@* <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"> *@
+@* <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> *@
+@* <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script> *@
+@* <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> *@
+@* <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script> *@
+@* <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script> *@
+
+
+
+
+
+

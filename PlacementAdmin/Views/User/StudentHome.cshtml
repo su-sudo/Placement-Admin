@@ -1,0 +1,45 @@
+﻿@model PlacementAdmin.Models.ViewModel.StudentHomeViewModel
+
+@{
+    Layout = "~/Views/User/_StudentLayout.cshtml";
+    ViewData["Title"] = "Student Home Page";
+}
+
+<div class="jumbotron">
+    <h1 class="display-4">Welcome, @ViewBag.Username!</h1>
+    <p class="lead">Here's your Test Stats.</p>
+</div>
+
+<div class="container">
+    <canvas id="performanceChart" width="300" height="100"></canvas>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById('performanceChart').getContext('2d');
+        var chartData = {
+            labels: @Html.Raw(Json.Serialize(Model.TestResults.Select(tr => tr.TestName))),
+            datasets: [{
+                label: 'Score Percentage',
+                data: @Html.Raw(Json.Serialize(Model.TestResults.Select(tr => tr.ScorePercentage))),
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        var performanceChart = new Chart(ctx, {
+            type: 'line', 
+            data: chartData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                }
+            }
+        });
+    </script>
+}
